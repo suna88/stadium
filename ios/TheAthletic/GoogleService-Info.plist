@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>686590016011-mu5k3nh3qfu1e06teghttu95ufu69qe6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.686590016011-mu5k3nh3qfu1e06teghttu95ufu69qe6</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCGWePSIz_MAQ8Lnwdo0AIIna2uyVpKRjE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>686590016011</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>sun.TheAthletic</string>
+	<key>PROJECT_ID</key>
+	<string>theathletic-be297</string>
+	<key>STORAGE_BUCKET</key>
+	<string>theathletic-be297.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:686590016011:ios:c421cf25244cdbde</string>
+	<key>DATABASE_URL</key>
+	<string>https://theathletic-be297.firebaseio.com</string>
+</dict>
+</plist>

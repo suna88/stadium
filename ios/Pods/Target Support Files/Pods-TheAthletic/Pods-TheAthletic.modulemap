@@ -1,0 +1,6 @@
+framework module Pods_TheAthletic {
+  umbrella header "Pods-TheAthletic-umbrella.h"
+
+  export *
+  module * { export * }
+}
