@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <h1>Admin Page</h1>
-    <div v-if="done" class="done">
+  <div class="container">
+    <h1 class="theme">Admin Page</h1>
+    <div v-if="step == 3" class="done">
       アップロード完了
     </div>
-    <div v-if="mask" class="mask">
+    <div v-if="step == 2" class="mask">
       アップロード中...
     </div>
-    <div v-if="isWriting" class="writing">
+    <div v-if="step == 0" class="writing">
       <div class="title">
         <h3>記事タイトル</h3>
         <input v-model="title">
@@ -23,12 +23,12 @@
       </div>
       <div class="content-area">
         <h3>記事本文</h3>
-        <textarea v-model="content"></textarea>
+        <textarea v-model="content" wrap="hard"></textarea>
       </div>
       <button v-if="isEmpty" class="button disabled" disabled>確認する</button>
-      <button v-if="!isEmpty" class="button" @click="confirm">確認する</button>
+      <button v-if="!isEmpty" class="button" @click="addStep">確認する</button>
     </div>
-    <div v-if="!isWriting" class="confirm">
+    <div v-if="step == 1" class="confirm">
       <div class="title">
         <h3>記事タイトル</h3>
         <div>{{title}}</div>
@@ -53,12 +53,26 @@
 
 <style scoped lang="scss">
   .container {
+    > div > div:nth-child(-n+3){
+      text-align: center;
+      margin: 0 20% auto ;
+      padding-top: 10px;
+      padding-bottom: 40px;
+      border-bottom: 1px lightgray solid;
+    }
+    .theme {
+      margin: 0 40% auto;
+    }
+
   }
   .done {
+    position: absolute;
+    top:0;
+    left:0;
     text-align: center;
     padding-top: 400px;
     width: 100%;
-    height: 1000px;
+    height: 80%;
     background-color: dodgerblue;
     opacity: 0.8;
     color: white;
@@ -66,10 +80,13 @@
   }
 
   .mask {
+    position: absolute;
+    top:0;
+    left:0;
     text-align: center;
     padding-top: 400px;
     width: 100%;
-    height: 1000px;
+    height: 80%;
     background-color: rgba(20, 100, 20, 0.8);
     color: white;
     font-size: 32px;
@@ -79,8 +96,11 @@
     input {
       width: 80%;
       height: 50px;
-      font-size: 18px;
+      font-size: 14px;
     }
+  }
+
+  .author {
   }
 
   .eye-catch {
@@ -89,7 +109,7 @@
     }
     img {
       border-radius: 1px;
-      border: 1px solid gray;
+      border: 1px solid lightgray;
       margin: auto;
       display: block;
       width: 300px;
@@ -98,11 +118,18 @@
   }
 
   .content-area {
-    margin: 20px 10%;
+    margin: 20px 20%;
     textarea {
       width: 100%;
-      height: 500px;
-      font-size: 18px;
+      height: 750px;
+      font-size: 14px;
+      padding: 10px;
+    }
+    div{
+      padding: 20px;
+      border: 1px lightgray solid;
+      text-align: left;
+      white-space: pre-wrap;
     }
   }
 
@@ -122,10 +149,8 @@
 </style>
 
 <script>
-  /* eslint-disable no-trailing-spaces,indent */
-
+/* eslint-disable no-trailing-spaces,indent */
   import firebase from 'firebase'
-  import axios from 'axios'
 
   export default {
     name: 'Top',
@@ -140,12 +165,10 @@
         author: null,
         title: null,
         content: null,
-        isWriting: true,
+        step: 0,
         test: 'testImg',
         eyecatchImgFile: null,
-        eyecatchImgPreview: null,
-        mask: false,
-        done: false
+        eyecatchImgPreview: null
       }
     },
     created: function () {
@@ -165,11 +188,11 @@
       this.storageRef = firebase.storage().ref()
     },
     methods: {
-      confirm: function () {
-        this.isWriting = false
+      addStep: function () {
+        this.step += 1
       },
       submit: function () {
-        this.mask = true
+        this.addStep()
         this.ref.push({
           'title': this.title,
           'author': this.author,
@@ -195,8 +218,7 @@
         this.imgRef.put(this.eyecatchImgFile)
           .then((snapshot) => {
             console.log(snapshot)
-            this.mask = false
-            this.done = true
+            this.addStep()
             setTimeout(() => { this.$router.go({ name: 'Top' }) }, 3000)
           })
           .catch((e) => {
@@ -205,7 +227,7 @@
           })
       },
       reEdit: function () {
-        this.isWriting = true
+        this.step -= 1
         this.eyecatchImgPreview = null
         this.eyecatchImgFile = null
       }
