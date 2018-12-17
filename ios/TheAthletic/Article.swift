@@ -14,7 +14,8 @@ class Article: NSObject {
     var dbKey: String? = String()
     var title: String? = String()
     var bgImg: UIImage = UIImage()
-    var content: String? = String()
+    var contentImgs: [UIImage] = [UIImage]()
+    var contentTexts: [String?] = [String]()
     var author: String? = String()
     var updatedAt: String? = String()
 }
